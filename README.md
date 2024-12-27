@@ -158,8 +158,8 @@ String accepted. Final stack: [0, 'S', 1]
 Aho, Alfred V. et al. Compilers: Principles, Techniques, and Tools (2nd Edition). USA: Addison-Wesley Longman Publishing Co., Inc., 2006. ISBN: 0321486811.
 
 # Developers  
-- **[Juan Pablo Corena Alvarez]**
 - **[Pablo Cabrejos Múnera]**
+- **[Juan Pablo Corena Alvarez]**
 - **[Martin Vanegas Ospina]**
   
 Thank you for your hard work!!!
