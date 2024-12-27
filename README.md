@@ -14,7 +14,7 @@ A context-free grammar (CFG) is a formal grammar that defines a set of strings (
 
 **Chomsky Normal Form (CNF):** A CFG is in CNF if all productions are of the form A → BC or A → a.
 
-## First & Follow Set Calculation
+# First & Follow Set Calculation
 
 This section describes the implementation for calculating FIRST and FOLLOW sets, crucial for constructing parsing tables.
 
@@ -27,7 +27,7 @@ This section describes the implementation for calculating FIRST and FOLLOW sets,
 *   '$' is not a valid terminal.
 *   All nonterminals are productive.
 
-#### Input Format
+### Input Format
 
 Grammar rules are read from input.txt:
 
@@ -36,21 +36,25 @@ Grammar rules are read from input.txt:
     *   One line: Number of nonterminals (*m*).
     *   *m* lines: Production rules in the format <nonterminal> <derivations separated by spaces>.
 
-**Example input.txt:**2
+**Example input.txt:**
+```
+2
 2
 S AS A
 A a
 2
 S ASA
-A a #### Output Format
+A a
+```
+### Output Format
 
 For each test case, FIRST and FOLLOW sets are printed to the console:
 
 First(Nonterminal) = {terminal1, terminal2, ...}
-Follow(Nonterminal) = {terminal1, terminal2, ..., $}A blank line separates test case outputs.
+Follow(Nonterminal) = {terminal1, terminal2, ..., $} A blank line separates test case outputs.
 
 **Example Output:**
-
+```
 First(S) = {a}
 First(A) = {a}
 Follow(S) = {$}
@@ -60,50 +64,55 @@ First(S) = {a}
 First(A) = {a}
 Follow(S) = {$}
 Follow(A) = {$, a}
+```
 
 
-## Top-Down (LL(1)) Parser
+# Top-Down (LL(1)) Parser
 
 This section describes the table-driven predictive (LL(1)) parser implementation (Aho et al., Sections 4.4.3 and 4.4.4).
 
-#### Key Features
+### Key Features
 
 1.  LL(1) grammar verification.
 2.  FIRST set calculation for strings.
 3.  Parsing table construction (Algorithm 4.31).
 4.  Table-driven predictive parsing (Algorithm 4.34).
 
-#### Input Format
+### Input Format
 
 *   **Grammar:** From `input.txt` (same format as First & Follow).
 *   **Input String:** Passed to `analyze_string` (space-separated tokens).
 
 **Example Grammar in `input.txt`:**
-
+```
 E TE'
 E' +TE' e
 T FT'
 T' *FT' e
 F (E) id
+```
 
 
-**Example Usage:**
+### Example Usage:
 
 ```python
 # ... (Code to read grammar and create First_Follow object)
 FF.analyze_string("id + id * id")
-Output Format
+
+```
+### Output Format
 analyze_string prints a step-by-step parsing trace (stack and remaining input) and indicates acceptance or rejection.
 
-Example Output (abbreviated):
-
+### Example Output (abbreviated):
+```
 Analizando la cadena de entrada: 'id + id * id'
 
 Análisis paso a paso:
 Pila: ['$', 'E'], Entrada: id + id * id $
 ...
 La cadena de entrada fue aceptada.
-Bottom-Up (SLR) Parser
+```
+# Bottom-Up (SLR) Parser
 This section describes the SLR parser implementation (Aho et al., Sections 4.5 and 4.6).
 
 Key Features
@@ -115,31 +124,35 @@ Input Format
 Grammar rules are read from input.txt:
 
 Each line: Nonterminal -> Production1 | Production2 | ...
-Example input.txt:
 
+### Example input.txt:
+```
 S' -> S
 S -> S + T | T
 T -> T * F | F
 F -> ( S ) | id
+```
 Input strings are passed to LRparser.
 
-Example Usage:
+### Example Usage:
 
-Python
+```Python
 
 grammar_rules = read_grammar()
 ACTION, GOTO = SLRTable(grammar_rules)
 LRparser("id + id * id", ACTION, GOTO)
-Output Format
+```
+### Output Format
 LRparser prints a step-by-step parsing trace (stack, input, action) and indicates acceptance or rejection.
 
-Example Output (abbreviated):
-
+### Example Output (abbreviated):
+```
 Step-by-step analysis:
 
 Stack: [0], Input: ['id', '+', 'id', '*', 'id', '$'], Current symbol: id
 Shift: 'id' -> State 5
 ...
 String accepted. Final stack: [0, 'S', 1]
+```
 References
 Aho, Alfred V. et al. Compilers: Principles, Techniques, and Tools (2nd Edition). USA: Addison-Wesley Longman Publishing Co., Inc., 2006. ISBN: 0321486811.
